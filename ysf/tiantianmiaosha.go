@@ -36,6 +36,7 @@ func Strat(num int) string {
 
 	c.OnError(func(_ *colly.Response, err error) {
 		log.Println("Something went wrong2:", err)
+		Res = err.Error()
 	})
 
 	u10 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452585911539617?relateId=-1&relateType=0")
@@ -57,6 +58,7 @@ func Strat(num int) string {
 			log.Println(body)
 			Res = fmt.Sprintf("%s -------- %f", body.Name, body.SalesVol)
 		}
+		Res = "请求失败"
 	})
 
 	return Res

@@ -7,12 +7,14 @@ import (
 	"log"
 )
 
-type tResponse struct {
+type TResponse struct {
 	Name     string  `json:"name"`
 	SalesVol float32 `json:"salesVol"`
 }
 
-func Strat() {
+func Strat(num int) string {
+
+	res := ""
 
 	c := colly.NewCollector(
 		//Visit only domains hackerspaces.org, wiki.hackerspaces.org
@@ -36,15 +38,6 @@ func Strat() {
 		log.Println("Something went wrong2:", err)
 	})
 
-	c.OnResponse(func(r *colly.Response) {
-		//判断code
-		if r.StatusCode == 200 {
-			body := new(tResponse)
-			json.Unmarshal(r.Body, body)
-			log.Println(body)
-		}
-	})
-
 	u10 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452585911539617?relateId=-1&relateType=0")
 	u20 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452586526463905?relateId=-1&relateType=0")
 
@@ -55,5 +48,17 @@ func Strat() {
 	//rand.Seed(time.Now().UnixNano())
 	//var sleepTime = time.Duration(rand.Intn(4)) + 2
 	//time.Sleep(sleepTime * time.Second)
+
+	c.OnResponse(func(r *colly.Response) {
+		//判断code
+		if r.StatusCode == 200 {
+			body := new(TResponse)
+			json.Unmarshal(r.Body, body)
+			log.Println(body)
+			res = fmt.Sprintf("%s ----- %f", body.Name, body.SalesVol)
+		}
+	})
+
+	return res
 
 }

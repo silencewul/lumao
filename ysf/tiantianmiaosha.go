@@ -12,9 +12,9 @@ type TResponse struct {
 	SalesVol float32 `json:"salesVol"`
 }
 
-func Strat(num int) string {
+var res string
 
-	res := ""
+func Strat(num int) string {
 
 	c := colly.NewCollector(
 		//Visit only domains hackerspaces.org, wiki.hackerspaces.org
@@ -43,7 +43,7 @@ func Strat(num int) string {
 
 	url := []string{u10, u20}
 
-	_ = c.Visit(url[0])
+	_ = c.Visit(url[num])
 
 	//rand.Seed(time.Now().UnixNano())
 	//var sleepTime = time.Duration(rand.Intn(4)) + 2

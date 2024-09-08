@@ -45,7 +45,7 @@ func Strat(num int) string {
 			body := new(TResponse)
 			json.Unmarshal(r.Body, body)
 			log.Println(body)
-			Res = fmt.Sprintf("%s -------- %f", body.Name, body.SalesVol)
+			Res = fmt.Sprintf("%s -------- %v", body.Name, body.SalesVol)
 			//Res = string(r.Body)
 		}
 	})

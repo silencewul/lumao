@@ -2,8 +2,7 @@
 *.log
  
 # 忽略特定文件
-go.mod
-go.sum
+
  
 # 忽略整个目录
 node_modules/

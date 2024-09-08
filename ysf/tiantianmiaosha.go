@@ -12,7 +12,7 @@ type TResponse struct {
 	SalesVol float32 `json:"salesVol"`
 }
 
-var res string
+var Res string
 
 func Strat(num int) string {
 
@@ -55,10 +55,10 @@ func Strat(num int) string {
 			body := new(TResponse)
 			json.Unmarshal(r.Body, body)
 			log.Println(body)
-			res = fmt.Sprintf("%s ----- %f", body.Name, body.SalesVol)
+			Res = fmt.Sprintf("%s -------- %f", body.Name, body.SalesVol)
 		}
 	})
 
-	return res
+	return Res
 
 }

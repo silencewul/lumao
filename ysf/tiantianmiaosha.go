@@ -1,7 +1,6 @@
 package ysf
 
 import (
-	"encoding/json"
 	"fmt"
 	"github.com/gocolly/colly"
 	"log"
@@ -39,17 +38,6 @@ func Strat(num int) string {
 		Res = err.Error()
 	})
 
-	u10 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452585911539617?relateId=-1&relateType=0")
-	u20 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452586526463905?relateId=-1&relateType=0")
-
-	url := []string{u10, u20}
-
-	_ = c.Visit(url[num])
-
-	//rand.Seed(time.Now().UnixNano())
-	//var sleepTime = time.Duration(rand.Intn(4)) + 2
-	//time.Sleep(sleepTime * time.Second)
-
 	c.OnResponse(func(r *colly.Response) {
 		//判断code
 		if r.StatusCode == 200 {
@@ -61,6 +49,17 @@ func Strat(num int) string {
 		}
 		Res = "请求失败"
 	})
+
+	u10 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452585911539617?relateId=-1&relateType=0")
+	u20 := fmt.Sprintf("https://cqbdshzq.cup.com.cn/wap/api-gateway/api-center/mall/goods/1452586526463905?relateId=-1&relateType=0")
+
+	url := []string{u10, u20}
+
+	_ = c.Visit(url[num])
+
+	//rand.Seed(time.Now().UnixNano())
+	//var sleepTime = time.Duration(rand.Intn(4)) + 2
+	//time.Sleep(sleepTime * time.Second)
 
 	return Res
 

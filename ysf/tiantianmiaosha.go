@@ -8,8 +8,12 @@ import (
 )
 
 type TResponse struct {
-	Name     string  `json:"name"`
-	SalesVol float32 `json:"salesVol"`
+	Name             string  `json:"name"`
+	SalesVol         float32 `json:"salesVol"`
+	RemainStock      float32 `json:"remainStock"`
+	SaleEnkStatus    int     `json:"saleEnkStatus"`
+	Enable           int     `json:"enable"`
+	SoldEnableStatus bool    `json:"soldEnableStatus"`
 }
 
 var Res string

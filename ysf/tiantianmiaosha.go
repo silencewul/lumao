@@ -8,6 +8,7 @@ import (
 )
 
 type TResponse struct {
+	Id				int `json:"id"`
 	Name             string  `json:"name"`
 	SalesVol         float32 `json:"salesVol"`
 	RemainStock      float32 `json:"remainStock"`
@@ -16,9 +17,11 @@ type TResponse struct {
 	SoldEnableStatus bool    `json:"soldEnableStatus"`
 }
 
-var Res string
+//var Res string
 
-func Strat(num int) string {
+func Strat(num int) *TResponse {
+
+	var body = new(TResponse)
 
 	c := colly.NewCollector(
 		//Visit only domains hackerspaces.org, wiki.hackerspaces.org
@@ -40,16 +43,15 @@ func Strat(num int) string {
 
 	c.OnError(func(_ *colly.Response, err error) {
 		log.Println("Something went wrong2:", err)
-		Res = err.Error()
+		//Res = err.Error()
 	})
 
 	c.OnResponse(func(r *colly.Response) {
 		//判断code
 		if r.StatusCode == 200 {
-			body := new(TResponse)
 			json.Unmarshal(r.Body, body)
-			log.Println(string(r.Body))
-			Res = fmt.Sprintf("%s -------- %v", body.Name, body.SalesVol)
+			log.Println(body)
+			//Res = fmt.Sprintf("%s -------- %v", body.Name, body.SalesVol)
 			//Res = string(r.Body)
 		}
 	})
@@ -65,6 +67,6 @@ func Strat(num int) string {
 	//var sleepTime = time.Duration(rand.Intn(4)) + 2
 	//time.Sleep(sleepTime * time.Second)
 
-	return Res
+	return body
 
 }

@@ -44,7 +44,7 @@ func Strat(num int) string {
 		if r.StatusCode == 200 {
 			body := new(TResponse)
 			json.Unmarshal(r.Body, body)
-			log.Println(body)
+			log.Println(string(r.Body))
 			Res = fmt.Sprintf("%s -------- %v", body.Name, body.SalesVol)
 			//Res = string(r.Body)
 		}
